@@ -1,6 +1,7 @@
 import express from "express"
 import { protect } from "../../middleware/auth.js"
 import Profile from "../../models/Profile.js"
+import Post from "../../models/Post.js"
 import User from "../../models/Users.js"
 import request from "request"
 import config from "config"
@@ -10,8 +11,7 @@ const  router = express.Router()
 
 router.get("/me", protect, async (req, res) => {
     try {
-        const profile = await (await Profile.findOne({ user: req.user.id })).populate("user", 
-        ["name", "avatar"])
+        const profile = await Profile.findOne({ user: req.user.id }).populate("user", ["name", "avatar"])
 
         if (!profile) {
             return res.status(400).json({msg: "No Profile Found"})
@@ -121,6 +121,9 @@ router.get("/user/:id", async (req, res) => {
 
 router.delete("/", protect, async (req, res) => {
     try {
+
+        await Post.deleteMany({ user: req.user.id })
+
        await Profile.findOneAndRemove({ user: req.user.id })
 
        await User.findOneAndRemove({ _id: req.user.id })
