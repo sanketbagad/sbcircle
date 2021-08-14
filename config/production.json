@@ -1,0 +1,6 @@
+{
+    "mongoURI" : "mongodb+srv://sanketsb2157:aishwariya@devconnector.wqaih.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtSecret" : "sanketsb1122",
+    "githubClientId": "2c38c12e349635f421c0",
+    "githubSecret" : "173f5ca618d4c3384191d48bdc9e13a6b578cd44"
+}
